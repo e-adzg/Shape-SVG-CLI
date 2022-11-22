@@ -92,156 +92,40 @@ namespace Assignment3
 
                     switch (userRead) //this is a long switch case for every input possible that the user can enter
                     {
-                        case "A rectangle": //if the user enters rectangle, it will let the user input all variables about the shape
-                            Console.WriteLine("Set the height:");
-                            string? userHeight = Console.ReadLine();
-                            Console.WriteLine("Set the width:");
-                            string? userWitdh = Console.ReadLine();
-                            Console.WriteLine("Set the X:");
-                            string? userRecX = Console.ReadLine();
-                            Console.WriteLine("Set the Y:");
-                            string? userRecY = Console.ReadLine();
-                            Console.WriteLine("Enter Fill Colour:");
-                            string? userFill = Console.ReadLine();
-                            Console.WriteLine("Enter Stroke Colour:");
-                            string? userRecStrokeColour = Console.ReadLine();
-                            Console.WriteLine("Enter Stroke Width:");
-                            string? valRecStrokeWidth = Console.ReadLine();
-                            Console.WriteLine("Enter Fill Opacity:");
-                            string? userRecFillOpacity = Console.ReadLine();
-                            Console.WriteLine("Enter Stroke Opacity:");
-                            string? userRecStrokeOpacity = Console.ReadLine();
-
-                            shapes.Add(new Rectangle(userRecX, userRecY, userHeight, userWitdh, userFill, userRecStrokeColour, valRecStrokeWidth, userRecFillOpacity, userRecStrokeOpacity)); //this will add all the variables to the list
-
-                            Console.WriteLine("\nRectangle Added!\n");
-
+                        case "A rectangle":
+                            shapes = AddRectangle(shapes);
                             break;
 
-                        case "A circle": //all these shape cases are the same as rectangle except to their own unique shape
-                            Console.WriteLine("Set the radius:");
-                            string? userCr = Console.ReadLine();
-                            Console.WriteLine("Set the circle X:");
-                            string? userCx = Console.ReadLine();
-                            Console.WriteLine("Set the circle Y:");
-                            string? userCy = Console.ReadLine();
-                            Console.WriteLine("Enter Stroke Colour:");
-                            string? userCircleStroke = Console.ReadLine();
-                            Console.WriteLine("Enter Stroke Witdh:");
-                            string? userCircleStrokeWidth = Console.ReadLine();
-                            Console.WriteLine("Enter Fill Colour:");
-                            string? userCircleFill = Console.ReadLine();
-
-                            shapes.Add(new Circle(userCr, userCx, userCy, userCircleStroke, userCircleStrokeWidth, userCircleFill));
-
-                            Console.WriteLine("\nCircle Added!\n");
-
+                        case "A circle":
+                            shapes = AddCircle(shapes);
                             break;
 
                         case "A ellipse":
-                            Console.WriteLine("Set the position X:");
-                            string? userEx = Console.ReadLine();
-                            Console.WriteLine("Set the position Y:");
-                            string? userEy = Console.ReadLine();
-                            Console.WriteLine("Set the radius X:");
-                            string? userEr1 = Console.ReadLine();
-                            Console.WriteLine("Set the radius Y:");
-                            string? userEr2 = Console.ReadLine();
-                            Console.WriteLine("Enter Fill Colour:");
-                            string? userEllipseFill = Console.ReadLine();
-                            Console.WriteLine("Enter Stroke Colour:");
-                            string? userEllipseStroke = Console.ReadLine();
-                            Console.WriteLine("Enter Stroke Width:");
-                            string? userEllipseStrokeWidth = Console.ReadLine();
-
-                            shapes.Add(new Ellipse(userEx, userEy, userEr1, userEr2, userEllipseFill, userEllipseStroke, userEllipseStrokeWidth));
-
-                            Console.WriteLine("\nEllipse Added!\n");
-
+                            shapes = AddEllipse(shapes);
                             break;
 
                         case "A line":
-                            Console.WriteLine("Set the X1:");
-                            string? userLineX1 = Console.ReadLine();
-                            Console.WriteLine("Set the Y1:");
-                            string? userLineY1 = Console.ReadLine();
-                            Console.WriteLine("Set the X2:");
-                            string? userLineX2 = Console.ReadLine();
-                            Console.WriteLine("Set the Y2:");
-                            string? userLineY2 = Console.ReadLine();
-                            Console.WriteLine("Enter Stroke Colour: (string)");
-                            string? userLineStroke = Console.ReadLine();
-                            Console.WriteLine("Enter Stroke Width: (string)");
-                            string? userLineStrokeWidth = Console.ReadLine();
-
-                            shapes.Add(new Line(userLineX1, userLineY1, userLineX2, userLineY2, userLineStroke, userLineStrokeWidth));
-
-                            Console.WriteLine("\nLine Added!\n");
-
+                            shapes = AddLine(shapes);
                             break;
 
                         case "A polyline":
-                            Console.WriteLine("Enter the polyline points: (E.g. 20,20 40,25 60,40 80,120 120,140 200,180)");
-                            string? userPoint = Console.ReadLine();
-                            Console.WriteLine("Enter Fill Colour: (string) (can enter: none)");
-                            string? userPolylineFill = Console.ReadLine();
-                            Console.WriteLine("Enter Stroke Colour: (string)");
-                            string? userPolylineStroke = Console.ReadLine();
-                            Console.WriteLine("Enter Stroke Width: (string)");
-                            string? userPolylineStrokeWidth = Console.ReadLine();
-
-
-                            shapes.Add(new Polyline(userPoint, userPolylineFill, userPolylineStroke, userPolylineStrokeWidth));
-
-                            Console.WriteLine("\nPolyline Added!\n");
-
+                            shapes = AddPolyline(shapes);
                             break;
 
                         case "A polygon":
-                            Console.WriteLine("Enter the polygon points: (E.g. 200,10 250,190 160,210)");
-                            string? userPointGon = Console.ReadLine();
-                            Console.WriteLine("Enter Fill Colour: (string)");
-                            string? userPolygonFill = Console.ReadLine();
-                            Console.WriteLine("Enter Stroke Colour: (string)");
-                            string? userPolygonStroke = Console.ReadLine();
-                            Console.WriteLine("Enter Stroke Width: (string)");
-                            string? userPolygonStrokeWidth = Console.ReadLine();
-
-                            shapes.Add(new Polygon(userPointGon, userPolygonFill, userPolygonStroke, userPolygonStrokeWidth));
-
-                            Console.WriteLine("\nPolygon Added!\n");
-
+                            shapes = AddPolygon(shapes);
                             break;
 
                         case "A path":
-                            Console.WriteLine("Enter the path points: (E.g. M 175 200 l 150 0)");
-                            string? userPath = Console.ReadLine();
-                            Console.WriteLine("Enter Stroke Colour: (string)");
-                            string? userPathStroke = Console.ReadLine();
-                            Console.WriteLine("Enter Stroke Width: (string)");
-                            string? userPathStrokeWidth = Console.ReadLine();
-                            Console.WriteLine("Enter Fill Colour: (string)");
-                            string? userPathFill = Console.ReadLine();
-
-                            shapes.Add(new Path(userPath, userPathStroke, userPathStrokeWidth, userPathFill));
-
-                            Console.WriteLine("\nPath Added!\n");
-
+                            shapes = AddPath(shapes);
                             break;
 
-                        case "A canvas": //this lets the user enter the canvas height and width
-                            Console.WriteLine("\nEnter Canvas Height:");
-                            string? userSvgHeight = Console.ReadLine();
-                            Console.WriteLine("Enter Canvas Width:");
-                            string? userSvgWidth = Console.ReadLine();
-
-                            svgHeight = userSvgHeight; //this overwrites the current canvas height and width
-                            svgWidth = userSvgWidth;
+                        case "V":
+                            svgHeight = ChangeCanvasHeight(svgHeight);
+                            svgWidth = ChangeCanvasWidth(svgWidth);
                             svgOpening = String.Format(@"<svg height=""{0}"" width=""{1}"" xmlns=""http://www.w3.org/2000/svg"">", svgHeight, svgWidth);
                             svgOpen = svgOpening + Environment.NewLine;
-
-                            Console.WriteLine("\nCanvas Has Been Modified!\n");
-
+                            Console.WriteLine("\nCanvas Updated!");
                             break;
 
                         case "export":
@@ -326,6 +210,142 @@ namespace Assignment3
                 }
                 programRun = false;
             }
+        }
+
+        public static string? ChangeCanvasHeight(string? svgHeight)
+        {
+            Console.WriteLine("\nEnter Canvas Height:");
+            string? userSvgHeight = Console.ReadLine();
+            return userSvgHeight;
+        }
+        public static string? ChangeCanvasWidth(string? svgWidth)
+        {
+            Console.WriteLine("Enter Canvas Width:");
+            string? userSvgWidth = Console.ReadLine();
+            return userSvgWidth;
+        }
+        public static List<Shape> AddRectangle(List<Shape> shapes)
+        {
+            Console.WriteLine("Set the height:");
+            string? userHeight = Console.ReadLine();
+            Console.WriteLine("Set the width:");
+            string? userWitdh = Console.ReadLine();
+            Console.WriteLine("Set the X:");
+            string? userRecX = Console.ReadLine();
+            Console.WriteLine("Set the Y:");
+            string? userRecY = Console.ReadLine();
+            Console.WriteLine("Enter Fill Colour:");
+            string? userFill = Console.ReadLine();
+            Console.WriteLine("Enter Stroke Colour:");
+            string? userRecStrokeColour = Console.ReadLine();
+            Console.WriteLine("Enter Stroke Width:");
+            string? valRecStrokeWidth = Console.ReadLine();
+            Console.WriteLine("Enter Fill Opacity:");
+            string? userRecFillOpacity = Console.ReadLine();
+            Console.WriteLine("Enter Stroke Opacity:");
+            string? userRecStrokeOpacity = Console.ReadLine();
+            shapes.Add(new Rectangle(userRecX, userRecY, userHeight, userWitdh, userFill, userRecStrokeColour, valRecStrokeWidth, userRecFillOpacity, userRecStrokeOpacity));
+            Console.WriteLine("\nRectangle Added!\n");
+            return shapes;
+        }
+
+        public static List<Shape> AddCircle(List<Shape> shapes)
+        {
+            Console.WriteLine("Set the radius:");
+            string? userCr = Console.ReadLine();
+            Console.WriteLine("Set the circle X:");
+            string? userCx = Console.ReadLine();
+            Console.WriteLine("Set the circle Y:");
+            string? userCy = Console.ReadLine();
+            Console.WriteLine("Enter Stroke Colour:");
+            string? userCircleStroke = Console.ReadLine();
+            Console.WriteLine("Enter Stroke Witdh:");
+            string? userCircleStrokeWidth = Console.ReadLine();
+            Console.WriteLine("Enter Fill Colour:");
+            string? userCircleFill = Console.ReadLine();
+            shapes.Add(new Circle(userCr, userCx, userCy, userCircleStroke, userCircleStrokeWidth, userCircleFill));
+            Console.WriteLine("\nCircle Added!\n");
+            return shapes;
+        }
+        public static List<Shape> AddEllipse(List<Shape> shapes)
+        {
+            Console.WriteLine("Set the position X:");
+            string? userEx = Console.ReadLine();
+            Console.WriteLine("Set the position Y:");
+            string? userEy = Console.ReadLine();
+            Console.WriteLine("Set the radius X:");
+            string? userEr1 = Console.ReadLine();
+            Console.WriteLine("Set the radius Y:");
+            string? userEr2 = Console.ReadLine();
+            Console.WriteLine("Enter Fill Colour:");
+            string? userEllipseFill = Console.ReadLine();
+            Console.WriteLine("Enter Stroke Colour:");
+            string? userEllipseStroke = Console.ReadLine();
+            Console.WriteLine("Enter Stroke Width:");
+            string? userEllipseStrokeWidth = Console.ReadLine();
+            shapes.Add(new Ellipse(userEx, userEy, userEr1, userEr2, userEllipseFill, userEllipseStroke, userEllipseStrokeWidth));
+            Console.WriteLine("\nEllipse Added!\n");
+            return shapes;
+        }
+        public static List<Shape> AddLine(List<Shape> shapes)
+        {
+            Console.WriteLine("Set the X1:");
+            string? userLineX1 = Console.ReadLine();
+            Console.WriteLine("Set the Y1:");
+            string? userLineY1 = Console.ReadLine();
+            Console.WriteLine("Set the X2:");
+            string? userLineX2 = Console.ReadLine();
+            Console.WriteLine("Set the Y2:");
+            string? userLineY2 = Console.ReadLine();
+            Console.WriteLine("Enter Stroke Colour: (string)");
+            string? userLineStroke = Console.ReadLine();
+            Console.WriteLine("Enter Stroke Width: (string)");
+            string? userLineStrokeWidth = Console.ReadLine();
+            shapes.Add(new Line(userLineX1, userLineY1, userLineX2, userLineY2, userLineStroke, userLineStrokeWidth));
+            Console.WriteLine("\nLine Added!\n");
+            return shapes;
+        }
+        public static List<Shape> AddPath(List<Shape> shapes)
+        {
+            Console.WriteLine("Enter the path points: (E.g. M 175 200 l 150 0)");
+            string? userPath = Console.ReadLine();
+            Console.WriteLine("Enter Stroke Colour: (string)");
+            string? userPathStroke = Console.ReadLine();
+            Console.WriteLine("Enter Stroke Width: (string)");
+            string? userPathStrokeWidth = Console.ReadLine();
+            Console.WriteLine("Enter Fill Colour: (string)");
+            string? userPathFill = Console.ReadLine();
+            shapes.Add(new Path(userPath, userPathStroke, userPathStrokeWidth, userPathFill));
+            Console.WriteLine("\nPath Added!\n");
+            return shapes;
+        }
+        public static List<Shape> AddPolygon(List<Shape> shapes)
+        {
+            Console.WriteLine("Enter the polygon points: (E.g. 200,10 250,190 160,210)");
+            string? userPointGon = Console.ReadLine();
+            Console.WriteLine("Enter Fill Colour: (string)");
+            string? userPolygonFill = Console.ReadLine();
+            Console.WriteLine("Enter Stroke Colour: (string)");
+            string? userPolygonStroke = Console.ReadLine();
+            Console.WriteLine("Enter Stroke Width: (string)");
+            string? userPolygonStrokeWidth = Console.ReadLine();
+            shapes.Add(new Polygon(userPointGon, userPolygonFill, userPolygonStroke, userPolygonStrokeWidth));
+            Console.WriteLine("\nPolygon Added!\n");
+            return shapes;
+        }
+        public static List<Shape> AddPolyline(List<Shape> shapes)
+        {
+            Console.WriteLine("Enter the polyline points: (E.g. 20,20 40,25 60,40 80,120 120,140 200,180)");
+            string? userPoint = Console.ReadLine();
+            Console.WriteLine("Enter Fill Colour: (string) (can enter: none)");
+            string? userPolylineFill = Console.ReadLine();
+            Console.WriteLine("Enter Stroke Colour: (string)");
+            string? userPolylineStroke = Console.ReadLine();
+            Console.WriteLine("Enter Stroke Width: (string)");
+            string? userPolylineStrokeWidth = Console.ReadLine();
+            shapes.Add(new Polyline(userPoint, userPolylineFill, userPolylineStroke, userPolylineStrokeWidth));
+            Console.WriteLine("\nPolyline Added!\n");
+            return shapes;
         }
     }
 }
