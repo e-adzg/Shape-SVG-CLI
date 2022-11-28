@@ -42,16 +42,10 @@ namespace Assignment3
     {
         static void Main(string[] args)
         {
+            Console.Clear(); //this is all console printing. I added colour because i thought it looked cool
+
             bool programRun = true; //checks if the programme is still running
             bool userInput = true;  //used to keep the while loop looping so that the user can keep entering shapes
-
-            Canvas canvas = new Canvas();
-            Console.WriteLine(canvas);
-            User user = new User();
-
-
-
-
 
             var shapes = new List<Shape>(); //this is the list that holds all shapes
 
@@ -65,18 +59,19 @@ namespace Assignment3
 
             while (programRun == true)
             {
-                Console.Clear(); //this is all console printing. I added colour because i thought it looked cool
 
                 Console.ForegroundColor = ConsoleColor.Red;
-                Console.WriteLine("Assignment 3");
+                Console.WriteLine("Assignment 4");
                 Console.WriteLine("By Erikas Adzgauskas 20415984");
                 Console.ResetColor();
                 Console.ForegroundColor = ConsoleColor.Blue;
                 Console.WriteLine("====================================");
                 Console.ResetColor();
-                Console.ForegroundColor = ConsoleColor.Green;
-                Console.WriteLine("\nCanvas Created - use commands to add shapes to the canvas!\n");
-                Console.ResetColor();
+
+                //!NEW STUFF
+                Canvas canvas = new Canvas();
+                User user = new User();
+                //!END OF NEW STUFF
 
                 // Console.ForegroundColor = ConsoleColor.Green;
                 // Console.WriteLine("SVG MAKER V1.0.0");

@@ -8,7 +8,6 @@ public class User
     public User()
     {
         Reset();
-        Console.WriteLine("Created a new User!"); Console.WriteLine();
     }
     public void Reset()
     {

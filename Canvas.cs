@@ -16,7 +16,9 @@ public class Canvas
 
     public Canvas()
     {
-        Console.WriteLine("\nCreated a new Canvas!"); Console.WriteLine();
+        Console.ForegroundColor = ConsoleColor.Green;
+        Console.WriteLine("\nCanvas Created - use commands to add shapes to the canvas!\n");
+        Console.ResetColor();
     }
 
     public override string ToString()
