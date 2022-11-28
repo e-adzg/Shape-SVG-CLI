@@ -55,7 +55,7 @@ namespace Assignment3
             string svgOpening = String.Format(@"<svg height=""{0}"" width=""{1}"" xmlns=""http://www.w3.org/2000/svg"">", svgHeight, svgWidth); //this is the first line for the SVG file which lets the user change the canvas
 
             string svgOpen = svgOpening + Environment.NewLine;
-            string svgClose = Environment.NewLine + @"</svg>"; //last line for the SVG file
+            string svgClose = @"</svg>"; //last line for the SVG file
 
             while (programRun == true)
             {
@@ -96,7 +96,7 @@ namespace Assignment3
                     switch (userRead) //this is a long switch case for every input possible that the user can enter
                     {
                         case "A rectangle":
-                            shapes = AddRectangle(shapes);
+                            AddRectangle(user, canvas);
                             break;
 
                         case "A circle":
@@ -104,23 +104,23 @@ namespace Assignment3
                             break;
 
                         case "A ellipse":
-                            shapes = AddEllipse(shapes);
+                            AddEllipse(user, canvas);
                             break;
 
                         case "A line":
-                            shapes = AddLine(shapes);
+                            AddLine(user, canvas);
                             break;
 
                         case "A polyline":
-                            shapes = AddPolyline(shapes);
+                            AddPolyline(user, canvas);
                             break;
 
                         case "A polygon":
-                            shapes = AddPolygon(shapes);
+                            AddPolygon(user, canvas);
                             break;
 
                         case "A path":
-                            shapes = AddPath(shapes);
+                            AddPath(user, canvas);
                             break;
 
                         case "V":
@@ -151,8 +151,9 @@ namespace Assignment3
                         case "E":
                             userInput = false; //ends the user input
 
-                            //! added canvas.ToString()
-                            File.WriteAllText(@"./An_SVG.svg", svgOpen + "".PadLeft(3, ' ') + canvas.ToString() + Environment.NewLine + svgClose); //file creation here
+                            // File.WriteAllText(@"./An_SVG.svg", svgOpen + "".PadLeft(3, ' ') + canvas.ToString() + Environment.NewLine + svgClose); //file creation here
+                            File.WriteAllText(@"./An_SVG.svg", svgOpen + Environment.NewLine + canvas.ToString() + Environment.NewLine + svgClose); //file creation here
+
 
                             Console.WriteLine("\nSVG Exported!\n");
 
@@ -235,7 +236,7 @@ namespace Assignment3
             string? userSvgWidth = Console.ReadLine();
             return userSvgWidth;
         }
-        public static List<Shape> AddRectangle(List<Shape> shapes)
+        public static void AddRectangle(User user, Canvas canvas)
         {
             Console.WriteLine("Set the height:");
             string? userHeight = Console.ReadLine();
@@ -255,9 +256,13 @@ namespace Assignment3
             string? userRecFillOpacity = Console.ReadLine();
             Console.WriteLine("Enter Stroke Opacity:");
             string? userRecStrokeOpacity = Console.ReadLine();
-            shapes.Add(new Rectangle(userRecX, userRecY, userHeight, userWitdh, userFill, userRecStrokeColour, valRecStrokeWidth, userRecFillOpacity, userRecStrokeOpacity));
+
+            user.Action(new AddShapeCommand(new Rectangle(userRecX, userRecY, userHeight, userWitdh, userFill, userRecStrokeColour, valRecStrokeWidth, userRecFillOpacity, userRecStrokeOpacity), canvas));
+
+            //shapes.Add(new Rectangle(userRecX, userRecY, userHeight, userWitdh, userFill, userRecStrokeColour, valRecStrokeWidth, userRecFillOpacity, userRecStrokeOpacity));
+
             Console.WriteLine("\nRectangle Added!\n");
-            return shapes;
+            //return shapes;
         }
 
         public static void AddCircle(User user, Canvas canvas)
@@ -275,17 +280,14 @@ namespace Assignment3
             Console.WriteLine("Enter Fill Colour:");
             string? userCircleFill = Console.ReadLine();
 
-            //! THIS IS CIRCLE NEW
             user.Action(new AddShapeCommand(new Circle(userCr, userCx, userCy, userCircleStroke, userCircleStrokeWidth, userCircleFill), canvas));
 
             //shapes.Add(new Circle(userCr, userCx, userCy, userCircleStroke, userCircleStrokeWidth, userCircleFill));
 
-
-
             Console.WriteLine("\nCircle Added!\n");
             //return shapes;
         }
-        public static List<Shape> AddEllipse(List<Shape> shapes)
+        public static void AddEllipse(User user, Canvas canvas)
         {
             Console.WriteLine("Set the position X:");
             string? userEx = Console.ReadLine();
@@ -301,11 +303,15 @@ namespace Assignment3
             string? userEllipseStroke = Console.ReadLine();
             Console.WriteLine("Enter Stroke Width:");
             string? userEllipseStrokeWidth = Console.ReadLine();
-            shapes.Add(new Ellipse(userEx, userEy, userEr1, userEr2, userEllipseFill, userEllipseStroke, userEllipseStrokeWidth));
+
+            user.Action(new AddShapeCommand(new Ellipse(userEx, userEy, userEr1, userEr2, userEllipseFill, userEllipseStroke, userEllipseStrokeWidth), canvas));
+
+            //shapes.Add(new Ellipse(userEx, userEy, userEr1, userEr2, userEllipseFill, userEllipseStroke, userEllipseStrokeWidth));
+
             Console.WriteLine("\nEllipse Added!\n");
-            return shapes;
+            //return shapes;
         }
-        public static List<Shape> AddLine(List<Shape> shapes)
+        public static void AddLine(User user, Canvas canvas)
         {
             Console.WriteLine("Set the X1:");
             string? userLineX1 = Console.ReadLine();
@@ -319,11 +325,15 @@ namespace Assignment3
             string? userLineStroke = Console.ReadLine();
             Console.WriteLine("Enter Stroke Width: (string)");
             string? userLineStrokeWidth = Console.ReadLine();
-            shapes.Add(new Line(userLineX1, userLineY1, userLineX2, userLineY2, userLineStroke, userLineStrokeWidth));
+
+            user.Action(new AddShapeCommand(new Line(userLineX1, userLineY1, userLineX2, userLineY2, userLineStroke, userLineStrokeWidth), canvas));
+
+            //shapes.Add(new Line(userLineX1, userLineY1, userLineX2, userLineY2, userLineStroke, userLineStrokeWidth));
+
             Console.WriteLine("\nLine Added!\n");
-            return shapes;
+            //return shapes;
         }
-        public static List<Shape> AddPath(List<Shape> shapes)
+        public static void AddPath(User user, Canvas canvas)
         {
             Console.WriteLine("Enter the path points: (E.g. M 175 200 l 150 0)");
             string? userPath = Console.ReadLine();
@@ -333,11 +343,15 @@ namespace Assignment3
             string? userPathStrokeWidth = Console.ReadLine();
             Console.WriteLine("Enter Fill Colour: (string)");
             string? userPathFill = Console.ReadLine();
-            shapes.Add(new Path(userPath, userPathStroke, userPathStrokeWidth, userPathFill));
+
+            user.Action(new AddShapeCommand(new Path(userPath, userPathStroke, userPathStrokeWidth, userPathFill), canvas));
+
+            //shapes.Add(new Path(userPath, userPathStroke, userPathStrokeWidth, userPathFill));
+
             Console.WriteLine("\nPath Added!\n");
-            return shapes;
+            //return shapes;
         }
-        public static List<Shape> AddPolygon(List<Shape> shapes)
+        public static void AddPolygon(User user, Canvas canvas)
         {
             Console.WriteLine("Enter the polygon points: (E.g. 200,10 250,190 160,210)");
             string? userPointGon = Console.ReadLine();
@@ -347,11 +361,15 @@ namespace Assignment3
             string? userPolygonStroke = Console.ReadLine();
             Console.WriteLine("Enter Stroke Width: (string)");
             string? userPolygonStrokeWidth = Console.ReadLine();
-            shapes.Add(new Polygon(userPointGon, userPolygonFill, userPolygonStroke, userPolygonStrokeWidth));
+
+            user.Action(new AddShapeCommand(new Polygon(userPointGon, userPolygonFill, userPolygonStroke, userPolygonStrokeWidth), canvas));
+
+            //shapes.Add(new Polygon(userPointGon, userPolygonFill, userPolygonStroke, userPolygonStrokeWidth));
+
             Console.WriteLine("\nPolygon Added!\n");
-            return shapes;
+            //return shapes;
         }
-        public static List<Shape> AddPolyline(List<Shape> shapes)
+        public static void AddPolyline(User user, Canvas canvas)
         {
             Console.WriteLine("Enter the polyline points: (E.g. 20,20 40,25 60,40 80,120 120,140 200,180)");
             string? userPoint = Console.ReadLine();
@@ -361,9 +379,13 @@ namespace Assignment3
             string? userPolylineStroke = Console.ReadLine();
             Console.WriteLine("Enter Stroke Width: (string)");
             string? userPolylineStrokeWidth = Console.ReadLine();
-            shapes.Add(new Polyline(userPoint, userPolylineFill, userPolylineStroke, userPolylineStrokeWidth));
+
+            user.Action(new AddShapeCommand(new Polyline(userPoint, userPolylineFill, userPolylineStroke, userPolylineStrokeWidth), canvas));
+
+            //shapes.Add(new Polyline(userPoint, userPolylineFill, userPolylineStroke, userPolylineStrokeWidth));
+
             Console.WriteLine("\nPolyline Added!\n");
-            return shapes;
+            //return shapes;
         }
     }
 }

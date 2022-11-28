@@ -26,7 +26,8 @@ public class Canvas
         String str = "";
         foreach (Shape s in canvas)
         {
-            str += " " + s + Environment.NewLine;
+            // str += " " + s + Environment.NewLine;
+            str += s + Environment.NewLine;
         }
         return str;
     }

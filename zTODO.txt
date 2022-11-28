@@ -4,3 +4,5 @@
 MEMENTO STUFF:
 - only circle works, add rest of shapes
 - clean
+
+remove the old addshape in methods
