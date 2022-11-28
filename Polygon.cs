@@ -1,4 +1,4 @@
-class Polygon : Shape
+public class Polygon : Shape
 {
     public string? GonPoints, polygonFill, polygonStroke, polygonStrokeWidth;
 

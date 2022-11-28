@@ -1,4 +1,4 @@
-class Line : Shape
+public class Line : Shape
 {
     public string? x1, y1, x2, y2;
     public string? lineStroke, lineStrokeWidth;

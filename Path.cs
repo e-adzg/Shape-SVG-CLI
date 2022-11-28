@@ -1,4 +1,4 @@
-class Path : Shape
+public class Path : Shape
 {
     public string? path, pathStroke, pathStrokeWidth, pathStrokeFill;
 

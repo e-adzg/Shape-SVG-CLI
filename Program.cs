@@ -45,6 +45,14 @@ namespace Assignment3
             bool programRun = true; //checks if the programme is still running
             bool userInput = true;  //used to keep the while loop looping so that the user can keep entering shapes
 
+            Canvas canvas = new Canvas();
+            Console.WriteLine(canvas);
+            User user = new User();
+
+
+
+
+
             var shapes = new List<Shape>(); //this is the list that holds all shapes
 
             string? svgHeight = "400"; //default values for canvas
@@ -97,7 +105,7 @@ namespace Assignment3
                             break;
 
                         case "A circle":
-                            shapes = AddCircle(shapes);
+                            AddCircle(user, canvas);
                             break;
 
                         case "A ellipse":
@@ -125,7 +133,7 @@ namespace Assignment3
                             svgWidth = ChangeCanvasWidth(svgWidth);
                             svgOpening = String.Format(@"<svg height=""{0}"" width=""{1}"" xmlns=""http://www.w3.org/2000/svg"">", svgHeight, svgWidth);
                             svgOpen = svgOpening + Environment.NewLine;
-                            Console.WriteLine("\nCanvas Updated!");
+                            Console.WriteLine("\nCanvas Updated!\n");
                             break;
 
                         case "export":
@@ -148,15 +156,8 @@ namespace Assignment3
                         case "E":
                             userInput = false; //ends the user input
 
-                            string allshapes2 = "";
-                            int length3 = shapes.Count; //gets the length of the list of shapes
-
-                            for (int i = 0; i < length3; i++) //while it goes through the list of shapes, it will add each ToString from every shape
-                            {
-                                allshapes2 = allshapes2 + Convert.ToString(shapes[i]);
-                            }
-
-                            File.WriteAllText(@"./An_SVG.svg", svgOpen + "".PadLeft(3, ' ') + allshapes2 + Environment.NewLine + svgClose); //file creation here
+                            //! added canvas.ToString()
+                            File.WriteAllText(@"./An_SVG.svg", svgOpen + "".PadLeft(3, ' ') + canvas.ToString() + Environment.NewLine + svgClose); //file creation here
 
                             Console.WriteLine("\nSVG Exported!\n");
 
@@ -180,25 +181,40 @@ namespace Assignment3
                             Console.ForegroundColor = ConsoleColor.Green;
                             Console.WriteLine("\nCommands:");
                             Console.ResetColor();
-                            Console.WriteLine("H               Help - displays this message\nA <shape>       Add <shape> to canvas\nU               Undo last operation\nR               Redo last operation\nC               Clear canvas\nD               Display canvas to console\nE               Export canvas\nQ               Quit application\n");
+                            Console.WriteLine("H               Help - displays this message\nA <shape>       Add <shape> to canvas\nT               Delete Last Shape\nU               Undo last operation\nR               Redo last operation\nC               Clear canvas\nV               Change Canvas Size\nD               Display canvas to console\nE               Export canvas\nQ               Quit application\n");
                             break;
 
                         case "D":
                             Console.ForegroundColor = ConsoleColor.Green;
                             Console.WriteLine("\nDisplaying SVG To Console:\n");
                             Console.ResetColor();
-
                             Console.WriteLine(svgOpen);
-
-                            int length2 = shapes.Count; //gets the length of the list of shapes
-
-                            for (int i = 0; i < length2; i++) //while it goes through the list of shapes, it will add each ToString from every shape
-                            {
-                                Console.WriteLine(Convert.ToString(shapes[i]));
-                            }
-
-
+                            Console.WriteLine(canvas);
                             Console.WriteLine(svgClose + "\n");
+                            break;
+
+                        case "T":
+                            try
+                            {
+                                user.Action(new DeleteShapeCommand(canvas));
+                                Console.ForegroundColor = ConsoleColor.Green;
+                                Console.WriteLine("\nShape Deleted!\n");
+                                Console.ResetColor();
+                            }
+                            catch
+                            {
+                                Console.ForegroundColor = ConsoleColor.Red;
+                                Console.WriteLine("\nERROR: Shape could not be deleted!\n");
+                                Console.ResetColor();
+                            }
+                            break;
+
+                        case "U":
+                            user.Undo();
+                            break;
+
+                        case "R":
+                            user.Redo();
                             break;
 
                         case "hello":
@@ -249,7 +265,7 @@ namespace Assignment3
             return shapes;
         }
 
-        public static List<Shape> AddCircle(List<Shape> shapes)
+        public static void AddCircle(User user, Canvas canvas)
         {
             Console.WriteLine("Set the radius:");
             string? userCr = Console.ReadLine();
@@ -263,9 +279,16 @@ namespace Assignment3
             string? userCircleStrokeWidth = Console.ReadLine();
             Console.WriteLine("Enter Fill Colour:");
             string? userCircleFill = Console.ReadLine();
-            shapes.Add(new Circle(userCr, userCx, userCy, userCircleStroke, userCircleStrokeWidth, userCircleFill));
+
+            //! THIS IS CIRCLE NEW
+            user.Action(new AddShapeCommand(new Circle(userCr, userCx, userCy, userCircleStroke, userCircleStrokeWidth, userCircleFill), canvas));
+
+            //shapes.Add(new Circle(userCr, userCx, userCy, userCircleStroke, userCircleStrokeWidth, userCircleFill));
+
+
+
             Console.WriteLine("\nCircle Added!\n");
-            return shapes;
+            //return shapes;
         }
         public static List<Shape> AddEllipse(List<Shape> shapes)
         {

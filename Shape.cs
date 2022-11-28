@@ -1,4 +1,7 @@
-public interface Shape
+public abstract class Shape
 {
-    public static List<Shape> shapes = new List<Shape>(); //LIST
+    public override string ToString()
+    {
+        return "Shape!";
+    }
 }

@@ -1,0 +1,6 @@
+- Clear Canvas Command
+
+
+MEMENTO STUFF:
+- only circle works, add rest of shapes
+- clean

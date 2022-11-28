@@ -1,4 +1,4 @@
-class Polyline : Shape
+public class Polyline : Shape
 {
     public string? points, polylineFill, polylineStroke, polylineStrokeWidth;
 

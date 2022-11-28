@@ -1,4 +1,4 @@
-class Circle : Shape
+public class Circle : Shape
 {
     public string? cr, cx, cy;
     public string? circleStroke, circleStrokeWidth, circleFill;

@@ -1,4 +1,4 @@
-class Rectangle : Shape     //RECTANGLE EXTENDS SHAPE
+public class Rectangle : Shape     //RECTANGLE EXTENDS SHAPE
 {
     public string? rx, ry, rH, rW;   //these are all variables that rectangle will use
     public string? recFill, recStroke, recStrokeWidth, recFillOpacity, recStrokeOpacity;

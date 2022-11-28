@@ -1,4 +1,4 @@
-class Ellipse : Shape   //the rest of these classes have the same layout as rectangle, just unique to their own shape
+public class Ellipse : Shape   //the rest of these classes have the same layout as rectangle, just unique to their own shape
 {
     public string? ex, ey, er1, er2;
     public string? ellipseFill, ellipseStroke, ellipseStrokeWidth;
