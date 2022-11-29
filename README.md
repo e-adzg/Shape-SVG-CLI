@@ -4,4 +4,4 @@
 
 <https://imgur.com/qVg1zPj>
 
-[![Alt text](./Pictures/readMePicture.pngreadMePicture.png)](https://www.youtube.com/watch?v=1qEBJnzuLiA&ab_channel=BingeSociety)
+[![Alt text](readMePicture.png)](https://www.youtube.com/watch?v=1qEBJnzuLiA&ab_channel=BingeSociety)
