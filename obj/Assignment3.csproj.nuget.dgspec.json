@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Lotsa\\Documents\\VS\\C#\\Assignment4\\CS264_Assignment4\\CS264_Assignment4\\Assignment3.csproj": {}
+    "C:\\Users\\Erik\\Documents\\VScode\\C#\\CS264_Assignment4\\Assignment3.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Lotsa\\Documents\\VS\\C#\\Assignment4\\CS264_Assignment4\\CS264_Assignment4\\Assignment3.csproj": {
+    "C:\\Users\\Erik\\Documents\\VScode\\C#\\CS264_Assignment4\\Assignment3.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Lotsa\\Documents\\VS\\C#\\Assignment4\\CS264_Assignment4\\CS264_Assignment4\\Assignment3.csproj",
+        "projectUniqueName": "C:\\Users\\Erik\\Documents\\VScode\\C#\\CS264_Assignment4\\Assignment3.csproj",
         "projectName": "Assignment3",
-        "projectPath": "C:\\Users\\Lotsa\\Documents\\VS\\C#\\Assignment4\\CS264_Assignment4\\CS264_Assignment4\\Assignment3.csproj",
-        "packagesPath": "C:\\Users\\Lotsa\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Lotsa\\Documents\\VS\\C#\\Assignment4\\CS264_Assignment4\\CS264_Assignment4\\obj\\",
+        "projectPath": "C:\\Users\\Erik\\Documents\\VScode\\C#\\CS264_Assignment4\\Assignment3.csproj",
+        "packagesPath": "C:\\Users\\Erik\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\Erik\\Documents\\VScode\\C#\\CS264_Assignment4\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\Lotsa\\AppData\\Roaming\\NuGet\\NuGet.Config"
+          "C:\\Users\\Erik\\AppData\\Roaming\\NuGet\\NuGet.Config"
         ],
         "originalTargetFrameworks": [
           "net6.0"

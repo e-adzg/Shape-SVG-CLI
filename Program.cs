@@ -42,31 +42,24 @@ namespace Assignment3
     {
         static void Main(string[] args)
         {
-            Console.Clear(); //this is all console printing. I added colour because i thought it looked cool
+            Console.Clear();
 
-            bool programRun = true; //checks if the programme is still running
-            bool userInput = true;  //used to keep the while loop looping so that the user can keep entering shapes
+            bool programRun = true; //used to end the program
+            bool userInput = true;  //used to stop user input
 
-            var shapes = new List<Shape>(); //this is the list that holds all shapes
-
-            string? svgHeight = "400"; //default values for canvas
+            string? svgHeight = "400";
             string? svgWidth = "400";
 
-            string svgOpening = String.Format(@"<svg height=""{0}"" width=""{1}"" xmlns=""http://www.w3.org/2000/svg"">", svgHeight, svgWidth); //this is the first line for the SVG file which lets the user change the canvas
+            string svgOpening = String.Format(@"<svg height=""{0}"" width=""{1}"" xmlns=""http://www.w3.org/2000/svg"">", svgHeight, svgWidth);
 
             string svgOpen = svgOpening + Environment.NewLine;
-            string svgClose = @"</svg>"; //last line for the SVG file
+            string svgClose = @"</svg>";
 
             while (programRun == true)
             {
 
-                Console.ForegroundColor = ConsoleColor.Red;
-                Console.WriteLine("Assignment 4");
-                Console.WriteLine("By Erikas Adzgauskas 20415984");
-                Console.ResetColor();
-                Console.ForegroundColor = ConsoleColor.Blue;
-                Console.WriteLine("====================================");
-                Console.ResetColor();
+                Console.ForegroundColor = ConsoleColor.Red; Console.WriteLine("Assignment 4"); Console.WriteLine("By Erikas Adzgauskas 20415984"); Console.ResetColor();
+                Console.ForegroundColor = ConsoleColor.Blue; Console.WriteLine("===================================="); Console.ResetColor();
 
                 //!NEW STUFF
                 Canvas canvas = new Canvas();
@@ -112,54 +105,36 @@ namespace Assignment3
                             svgWidth = ChangeCanvasWidth(svgWidth);
                             svgOpening = String.Format(@"<svg height=""{0}"" width=""{1}"" xmlns=""http://www.w3.org/2000/svg"">", svgHeight, svgWidth);
                             svgOpen = svgOpening + Environment.NewLine;
-                            Console.WriteLine("\nCanvas Updated!\n");
-                            break;
-
-                        case "export":
-                            userInput = false; //ends the user input
-                            File.WriteAllText(@"./An_SVG.svg", svgOpen + Environment.NewLine + canvas.ToString() + Environment.NewLine + svgClose); //file creation here
-                            Console.WriteLine("\nSVG Exported!\n");
-
+                            Console.ForegroundColor = ConsoleColor.Green; Console.WriteLine("\nCanvas Updated!\n"); Console.ResetColor();
                             break;
 
                         case "E":
-                            userInput = false; //ends the user input
-                            File.WriteAllText(@"./An_SVG.svg", svgOpen + Environment.NewLine + canvas.ToString() + Environment.NewLine + svgClose); //file creation here
-                            Console.WriteLine("\nSVG Exported!\n");
+                            userInput = false;
+                            Export(svgOpen, svgClose, canvas);
                             break;
 
                         case "exit":
-                            userInput = false; //ends the user input so that the programme can close
-                            Console.ForegroundColor = ConsoleColor.Green;
-                            Console.WriteLine("\nGoodbye!\n");
-                            Console.ResetColor();
+                            userInput = false;
+                            Console.ForegroundColor = ConsoleColor.Green; Console.WriteLine("\nGoodbye!\n"); Console.ResetColor();
                             break;
 
                         case "Q":
-                            userInput = false; //ends the user input so that the programme can close
-                            Console.ForegroundColor = ConsoleColor.Green;
-                            Console.WriteLine("\nGoodbye!\n");
-                            Console.ResetColor();
+                            userInput = false;
+                            Console.ForegroundColor = ConsoleColor.Green; Console.WriteLine("\nGoodbye!\n"); Console.ResetColor();
                             break;
 
                         case "H":
-                            Console.ForegroundColor = ConsoleColor.Green;
-                            Console.WriteLine("\nCommands:");
-                            Console.ResetColor();
+                            Console.ForegroundColor = ConsoleColor.Green; Console.WriteLine("\nCommands:"); Console.ResetColor();
                             Console.WriteLine("H               Help - displays this message\nA <shape>       Add <shape> to canvas\nS               See list of shapes\nT               Delete Last Shape\nU               Undo last operation\nR               Redo last operation\nV               Change Canvas Size\nD               Display canvas to console\nE               Export canvas\nO               Clear Console\nQ               Quit application\n");
                             break;
 
                         case "S":
-                            Console.ForegroundColor = ConsoleColor.Green;
-                            Console.WriteLine("\nList of Shapes:");
-                            Console.ResetColor();
+                            Console.ForegroundColor = ConsoleColor.Green; Console.WriteLine("\nList of Shapes:"); Console.ResetColor();
                             Console.WriteLine("A rectangle\nA circle\nA ellipse\nA line\nA path\nA polygon\nA polyline\n");
                             break;
 
                         case "D":
-                            Console.ForegroundColor = ConsoleColor.Green;
-                            Console.WriteLine("\nDisplaying SVG To Console:\n");
-                            Console.ResetColor();
+                            Console.ForegroundColor = ConsoleColor.Green; Console.WriteLine("\nDisplaying SVG To Console:\n"); Console.ResetColor();
                             Console.WriteLine(svgOpen);
                             Console.WriteLine(canvas);
                             Console.WriteLine(svgClose + "\n");
@@ -169,24 +144,33 @@ namespace Assignment3
                             try
                             {
                                 user.Action(new DeleteShapeCommand(canvas));
-                                Console.ForegroundColor = ConsoleColor.Green;
-                                Console.WriteLine("\nShape Deleted!\n");
-                                Console.ResetColor();
                             }
                             catch
                             {
-                                Console.ForegroundColor = ConsoleColor.Red;
-                                Console.WriteLine("\nERROR: Shape could not be deleted!\n");
-                                Console.ResetColor();
+                                Console.ForegroundColor = ConsoleColor.Red; Console.WriteLine("\nERROR: Shape could not be deleted!\n"); Console.ResetColor();
                             }
                             break;
 
                         case "U":
-                            user.Undo();
+                            try
+                            {
+                                user.Undo();
+                            }
+                            catch
+                            {
+                                Console.ForegroundColor = ConsoleColor.Red; Console.WriteLine("\nERROR: Cannot Undo!\n"); Console.ResetColor();
+                            }
                             break;
 
                         case "R":
-                            user.Redo();
+                            try
+                            {
+                                user.Redo();
+                            }
+                            catch
+                            {
+                                Console.ForegroundColor = ConsoleColor.Red; Console.WriteLine("\nERROR: Cannot Redo!\n"); Console.ResetColor();
+                            }
                             break;
 
                         case "O":
@@ -194,36 +178,40 @@ namespace Assignment3
                             break;
 
                         case "hello":
-                            Console.ForegroundColor = ConsoleColor.Green;
-                            Console.WriteLine("\nHello!\n"); //hello :)
-                            Console.ResetColor();
+                            Console.ForegroundColor = ConsoleColor.DarkMagenta; Console.WriteLine("\nHello!\n"); Console.ResetColor();
                             break;
+
                         default:
-                            Console.ForegroundColor = ConsoleColor.Red;
-                            Console.WriteLine("\nInvalid Input! - Type 'Q' for commands!\n");
-                            Console.ResetColor();
+                            Console.ForegroundColor = ConsoleColor.Red; Console.WriteLine("\nInvalid Input! - Type 'Q' for commands!\n"); Console.ResetColor();
                             break;
                     }
                 }
                 programRun = false;
             }
         }
-
+        public static void Export(string? svgOpen, string? svgClose, Canvas canvas)
+        {
+            Console.ForegroundColor = ConsoleColor.Blue; Console.WriteLine("\nEnter File Name:"); Console.ResetColor();
+            string? svgName = Console.ReadLine();
+            File.WriteAllText(@"./" + svgName + ".svg", svgOpen + Environment.NewLine + canvas.ToString() + Environment.NewLine + svgClose);
+            Console.ForegroundColor = ConsoleColor.Green; Console.WriteLine("\nSVG Exported!\n"); Console.ResetColor();
+        }
         public static string? ChangeCanvasHeight(string? svgHeight)
         {
-            Console.WriteLine("\nEnter Canvas Height:");
+            Console.ForegroundColor = ConsoleColor.Blue; Console.WriteLine("\nEnter Canvas Height:"); Console.ResetColor();
             string? userSvgHeight = Console.ReadLine();
             return userSvgHeight;
         }
         public static string? ChangeCanvasWidth(string? svgWidth)
         {
-            Console.WriteLine("Enter Canvas Width:");
+
+            Console.ForegroundColor = ConsoleColor.Blue; Console.WriteLine("Enter Canvas Width:"); Console.ResetColor();
             string? userSvgWidth = Console.ReadLine();
             return userSvgWidth;
         }
         public static void AddRectangle(User user, Canvas canvas)
         {
-            Console.ForegroundColor = ConsoleColor.Blue; Console.WriteLine("Set the height:"); Console.ResetColor();
+            Console.ForegroundColor = ConsoleColor.Blue; Console.WriteLine("\nSet the height:"); Console.ResetColor();
             string? userHeight = Console.ReadLine();
             Console.ForegroundColor = ConsoleColor.Blue; Console.WriteLine("Set the width:"); Console.ResetColor();
             string? userWitdh = Console.ReadLine();
@@ -244,10 +232,9 @@ namespace Assignment3
 
             user.Action(new AddShapeCommand(new Rectangle(userRecX, userRecY, userHeight, userWitdh, userFill, userRecStrokeColour, valRecStrokeWidth, userRecFillOpacity, userRecStrokeOpacity), canvas));
         }
-
         public static void AddCircle(User user, Canvas canvas)
         {
-            Console.ForegroundColor = ConsoleColor.Blue; Console.WriteLine("Set the radius:"); Console.ResetColor();
+            Console.ForegroundColor = ConsoleColor.Blue; Console.WriteLine("\nSet the radius:"); Console.ResetColor();
             string? userCr = Console.ReadLine();
             Console.ForegroundColor = ConsoleColor.Blue; Console.WriteLine("Set the circle X:"); Console.ResetColor();
             string? userCx = Console.ReadLine();
@@ -264,7 +251,7 @@ namespace Assignment3
         }
         public static void AddEllipse(User user, Canvas canvas)
         {
-            Console.ForegroundColor = ConsoleColor.Blue; Console.WriteLine("Set the position X:"); Console.ResetColor();
+            Console.ForegroundColor = ConsoleColor.Blue; Console.WriteLine("\nSet the position X:"); Console.ResetColor();
             string? userEx = Console.ReadLine();
             Console.ForegroundColor = ConsoleColor.Blue; Console.WriteLine("Set the position Y:"); Console.ResetColor();
             string? userEy = Console.ReadLine();
@@ -283,7 +270,7 @@ namespace Assignment3
         }
         public static void AddLine(User user, Canvas canvas)
         {
-            Console.ForegroundColor = ConsoleColor.Blue; Console.WriteLine("Set the X1:"); Console.ResetColor();
+            Console.ForegroundColor = ConsoleColor.Blue; Console.WriteLine("\nSet the X1:"); Console.ResetColor();
             string? userLineX1 = Console.ReadLine();
             Console.ForegroundColor = ConsoleColor.Blue; Console.WriteLine("Set the Y1:"); Console.ResetColor();
             string? userLineY1 = Console.ReadLine();
@@ -291,48 +278,48 @@ namespace Assignment3
             string? userLineX2 = Console.ReadLine();
             Console.ForegroundColor = ConsoleColor.Blue; Console.WriteLine("Set the Y2:"); Console.ResetColor();
             string? userLineY2 = Console.ReadLine();
-            Console.ForegroundColor = ConsoleColor.Blue; Console.WriteLine("Enter Stroke Colour: (string)"); Console.ResetColor();
+            Console.ForegroundColor = ConsoleColor.Blue; Console.WriteLine("Enter Stroke Colour:"); Console.ResetColor();
             string? userLineStroke = Console.ReadLine();
-            Console.ForegroundColor = ConsoleColor.Blue; Console.WriteLine("Enter Stroke Width: (string)"); Console.ResetColor();
+            Console.ForegroundColor = ConsoleColor.Blue; Console.WriteLine("Enter Stroke Width:"); Console.ResetColor();
             string? userLineStrokeWidth = Console.ReadLine();
 
             user.Action(new AddShapeCommand(new Line(userLineX1, userLineY1, userLineX2, userLineY2, userLineStroke, userLineStrokeWidth), canvas));
         }
         public static void AddPath(User user, Canvas canvas)
         {
-            Console.ForegroundColor = ConsoleColor.Blue; Console.WriteLine("Enter the path points: (E.g. M 175 200 l 150 0)"); Console.ResetColor();
+            Console.ForegroundColor = ConsoleColor.Blue; Console.WriteLine("\nEnter the path points: (E.g. M 175 200 l 150 0)"); Console.ResetColor();
             string? userPath = Console.ReadLine();
-            Console.ForegroundColor = ConsoleColor.Blue; Console.WriteLine("Enter Stroke Colour: (string)"); Console.ResetColor();
+            Console.ForegroundColor = ConsoleColor.Blue; Console.WriteLine("Enter Stroke Colour:"); Console.ResetColor();
             string? userPathStroke = Console.ReadLine();
-            Console.ForegroundColor = ConsoleColor.Blue; Console.WriteLine("Enter Stroke Width: (string)"); Console.ResetColor();
+            Console.ForegroundColor = ConsoleColor.Blue; Console.WriteLine("Enter Stroke Width:"); Console.ResetColor();
             string? userPathStrokeWidth = Console.ReadLine();
-            Console.ForegroundColor = ConsoleColor.Blue; Console.WriteLine("Enter Fill Colour: (string)"); Console.ResetColor();
+            Console.ForegroundColor = ConsoleColor.Blue; Console.WriteLine("Enter Fill Colour:"); Console.ResetColor();
             string? userPathFill = Console.ReadLine();
 
             user.Action(new AddShapeCommand(new Path(userPath, userPathStroke, userPathStrokeWidth, userPathFill), canvas));
         }
         public static void AddPolygon(User user, Canvas canvas)
         {
-            Console.ForegroundColor = ConsoleColor.Blue; Console.WriteLine("Enter the polygon points: (E.g. 200,10 250,190 160,210)"); Console.ResetColor();
+            Console.ForegroundColor = ConsoleColor.Blue; Console.WriteLine("\nEnter the polygon points: (E.g. 200,10 250,190 160,210)"); Console.ResetColor();
             string? userPointGon = Console.ReadLine();
-            Console.ForegroundColor = ConsoleColor.Blue; Console.WriteLine("Enter Fill Colour: (string)"); Console.ResetColor();
+            Console.ForegroundColor = ConsoleColor.Blue; Console.WriteLine("Enter Fill Colour:"); Console.ResetColor();
             string? userPolygonFill = Console.ReadLine();
-            Console.ForegroundColor = ConsoleColor.Blue; Console.WriteLine("Enter Stroke Colour: (string)"); Console.ResetColor();
+            Console.ForegroundColor = ConsoleColor.Blue; Console.WriteLine("Enter Stroke Colour:"); Console.ResetColor();
             string? userPolygonStroke = Console.ReadLine();
-            Console.ForegroundColor = ConsoleColor.Blue; Console.WriteLine("Enter Stroke Width: (string)"); Console.ResetColor();
+            Console.ForegroundColor = ConsoleColor.Blue; Console.WriteLine("Enter Stroke Width:"); Console.ResetColor();
             string? userPolygonStrokeWidth = Console.ReadLine();
 
             user.Action(new AddShapeCommand(new Polygon(userPointGon, userPolygonFill, userPolygonStroke, userPolygonStrokeWidth), canvas));
         }
         public static void AddPolyline(User user, Canvas canvas)
         {
-            Console.ForegroundColor = ConsoleColor.Blue; Console.WriteLine("Enter the polyline points: (E.g. 20,20 40,25 60,40 80,120 120,140 200,180)"); Console.ResetColor();
+            Console.ForegroundColor = ConsoleColor.Blue; Console.WriteLine("\nEnter the polyline points: (E.g. 20,20 40,25 60,40 80,120 120,140 200,180)"); Console.ResetColor();
             string? userPoint = Console.ReadLine();
-            Console.ForegroundColor = ConsoleColor.Blue; Console.WriteLine("Enter Fill Colour: (string) (can enter: none)"); Console.ResetColor();
+            Console.ForegroundColor = ConsoleColor.Blue; Console.WriteLine("Enter Fill Colour:"); Console.ResetColor();
             string? userPolylineFill = Console.ReadLine();
-            Console.ForegroundColor = ConsoleColor.Blue; Console.WriteLine("Enter Stroke Colour: (string)"); Console.ResetColor();
+            Console.ForegroundColor = ConsoleColor.Blue; Console.WriteLine("Enter Stroke Colour:"); Console.ResetColor();
             string? userPolylineStroke = Console.ReadLine();
-            Console.ForegroundColor = ConsoleColor.Blue; Console.WriteLine("Enter Stroke Width: (string)"); Console.ResetColor();
+            Console.ForegroundColor = ConsoleColor.Blue; Console.WriteLine("Enter Stroke Width:"); Console.ResetColor();
             string? userPolylineStrokeWidth = Console.ReadLine();
 
             user.Action(new AddShapeCommand(new Polyline(userPoint, userPolylineFill, userPolylineStroke, userPolylineStrokeWidth), canvas));
