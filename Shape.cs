@@ -1,4 +1,4 @@
-public abstract class Shape
+public abstract class Shape //this class holds all of the classes and overrides for all shapes
 {
     public override string ToString()
     {

@@ -1,23 +1,18 @@
-// Add Shape Command - it is a ConcreteCommand Class (extends Command)
-// This adds a Shape (Circle) to the Canvas as the "Do" action
-public class AddShapeCommand : Command
+public class AddShapeCommand : Command //interface from command class
 {
     Shape shape;
     Canvas canvas;
 
-    public AddShapeCommand(Shape s, Canvas c)
+    public AddShapeCommand(Shape s, Canvas c) //method to get the shape and which canvas to store or undo
     {
         shape = s;
         canvas = c;
     }
-
-    // Adds a shape to the canvas as "Do" action
-    public override void Do()
+    public override void Do() //overrides the do method to add shape
     {
         canvas.Add(shape);
     }
-    // Removes a shape from the canvas as "Undo" action
-    public override void Undo()
+    public override void Undo() //overrides the undo method to undo
     {
         shape = canvas.Remove();
     }

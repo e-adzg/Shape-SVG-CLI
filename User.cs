@@ -1,28 +1,25 @@
-public class User
+public class User //user class
 {
-    private Stack<Command> undo;
-    private Stack<Command> redo;
+    private Stack<Command> undo; //creates undo stack
+    private Stack<Command> redo; //creates redo stack
 
-    public int UndoCount { get => undo.Count; }
-    public int RedoCount { get => redo.Count; }
+    public int UndoCount { get => undo.Count; } //gets the length of undo stack
+    public int RedoCount { get => redo.Count; } //gets the length of redo stack
     public User()
     {
-        Reset();
+        Reset(); //resets all stacks to brand new
     }
     public void Reset()
     {
         undo = new Stack<Command>();
         redo = new Stack<Command>();
     }
-
     public void Action(Command command)
     {
-        undo.Push(command);  // save the command to the undo command
-        redo.Clear();        // once a new command is issued, the redo stack clears
+        undo.Push(command); //save the command to undo stack
+        redo.Clear(); //clears redo stack when new command is added
 
-        // next determine  action from the Command object type
-        // this is going to be AddShapeCommand or DeleteShapeCommand
-        Type t = command.GetType();
+        Type t = command.GetType(); //figure out what type of command we are dealing with
         if (t.Equals(typeof(AddShapeCommand)))
         {
             command.Do();
@@ -32,17 +29,16 @@ public class User
             command.Do();
         }
     }
-
-    public void Undo()
+    public void Undo() //undo method
     {
-        if (undo.Count > 0)
+        if (undo.Count > 0) //if there is more than 0
         {
             Console.ForegroundColor = ConsoleColor.Green; Console.WriteLine("\nUndo Complete!"); Console.ResetColor();
-            Command c = undo.Pop();
-            c.Undo();
-            redo.Push(c);
+            Command c = undo.Pop(); //get latest command and pop it
+            c.Undo(); //undo the command
+            redo.Push(c); //push the command to redo stack
         }
-        else
+        else //or else it is empty and error
         {
             Console.ForegroundColor = ConsoleColor.Red; Console.WriteLine("\nERROR: Cannot Undo!\n"); Console.ResetColor();
         }
@@ -50,14 +46,14 @@ public class User
 
     public void Redo()
     {
-        if (redo.Count > 0)
+        if (redo.Count > 0) //if there is more than 0
         {
             Console.ForegroundColor = ConsoleColor.Green; Console.WriteLine("\nRedo Complete!"); Console.ResetColor();
-            Command c = redo.Pop();
-            c.Do();
-            undo.Push(c);
+            Command c = redo.Pop(); //get latest command and pop it
+            c.Do(); //do the command from redo stack
+            undo.Push(c); //push the command to undo stack
         }
-        else
+        else //or else the redo stack is empty and error
         {
             Console.ForegroundColor = ConsoleColor.Red; Console.WriteLine("\nERROR: Cannot Redo!\n"); Console.ResetColor();
         }

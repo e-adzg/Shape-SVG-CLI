@@ -3,30 +3,19 @@ Student Name: Erikas Adzgauskas
 Student Number: 20415984
 
 This is my SVG Maker. I am using NET 6.0. 
-Tested on Windows 11 Pro in VSCode 1.72.2
+Tested on Windows 11 Pro in VSCode 1.73.0
 
 HOW TO USE:
-to run programme, type 'dotnet run' in console. 
-for example, if you want to make a rectangle, you would type 'rectangle'
-then, input all of the co-ordinates and CSS styles you wish to add.
-all inputs take in string, so to add colour, you can type 'lime'
-inputs accepts decimals where appropriate.
+to run programme, type 'dotnet run' in console. for example, if you want to make a rectangle, you would type 'A rectangle' then, input all of the co-ordinates and CSS styles you wish to add. all inputs take in string, so to add colour, you can type 'lime'. inputs accepts decimals where appropriate.
 
 TO EXPORT:
-after adding shapes, you can type 'export' to make a SVG file
-and the programme will terminate and a new SVG file will
-be made in the same folder here.
+after adding shapes, you can type 'E' to make a SVG file. Enter the name of the SVG file and then the program will terminate and a new SVG file will be made in the same folder here.
 
 CODE CONTEXT:
-a list holds all shapes. the interface shape extends to all
-other shapes. after creating a new shape, it will be added 
-to the shapes list. at the end, when the user wants to export,
-it will loop through the list and add each SVG method to the
-SVG file.
-
+Command Pattern. Shapes will be pushed into canvas stack. There are undo and redo stacks. They will be pushing and removing shapes when they are called. The user class is the invoker class. The command class is the interface for commands. The deleteshapecommand and addshapecommand classes are classes that injerit from the command class. 
 */
 
-//using stat9c System.Console;
+//using static System.Console;
 using System;
 using System.Drawing;
 using System.Collections.Generic;
@@ -35,42 +24,37 @@ using System.Threading;
 
 namespace Assignment3
 {
-    //have 2 stacks, undo and redo, when redo-ing, take states from the redo stack and bring it back
-
     class Program
     {
-        static void Main(string[] args)
+        static void Main(string[] args) //main program
         {
             Console.Clear();
 
             bool programRun = true; //used to end the program
             bool userInput = true;  //used to stop user input
 
-            string? svgHeight = "400";
-            string? svgWidth = "400";
+            string? svgHeight = "400"; //default value
+            string? svgWidth = "400"; //default value
 
             string svgOpening = String.Format(@"<svg height=""{0}"" width=""{1}"" xmlns=""http://www.w3.org/2000/svg"">", svgHeight, svgWidth);
 
             string svgOpen = svgOpening + Environment.NewLine;
             string svgClose = @"</svg>";
 
-            while (programRun == true)
+            while (programRun == true) //keeps program on
             {
-
                 Console.ForegroundColor = ConsoleColor.Red; Console.WriteLine("Assignment 4"); Console.WriteLine("By Erikas Adzgauskas 20415984"); Console.ResetColor();
                 Console.ForegroundColor = ConsoleColor.Blue; Console.WriteLine("===================================="); Console.ResetColor();
 
-                //!NEW STUFF
-                Canvas canvas = new Canvas();
-                User user = new User();
-                //!END OF NEW STUFF
+                Canvas canvas = new Canvas(); //creates canvas
+                User user = new User(); //creates user
 
                 while (userInput == true) //this will let the user keep entering as many inputs while this is true
                 {
                     string? userRead = Console.ReadLine();
 
                     switch (userRead) //this is a long switch case for every input possible that the user can enter
-                    {
+                    {   //these shapes are using methods in which the user and canvas are being sent
                         case "A rectangle":
                             AddRectangle(user, canvas);
                             break;
@@ -99,7 +83,7 @@ namespace Assignment3
                             AddPath(user, canvas);
                             break;
 
-                        case "V":
+                        case "V": //change canvas size
                             svgHeight = ChangeCanvasHeight(svgHeight);
                             svgWidth = ChangeCanvasWidth(svgWidth);
                             svgOpening = String.Format(@"<svg height=""{0}"" width=""{1}"" xmlns=""http://www.w3.org/2000/svg"">", svgHeight, svgWidth);
@@ -107,39 +91,39 @@ namespace Assignment3
                             Console.ForegroundColor = ConsoleColor.Green; Console.WriteLine("\nCanvas Updated!\n"); Console.ResetColor();
                             break;
 
-                        case "E":
+                        case "E": //export
                             userInput = false;
                             Export(svgOpen, svgClose, canvas);
                             break;
 
-                        case "exit":
+                        case "exit": //exit
                             userInput = false;
                             Console.ForegroundColor = ConsoleColor.Green; Console.WriteLine("\nGoodbye!\n"); Console.ResetColor();
                             break;
 
-                        case "Q":
+                        case "Q": //exit
                             userInput = false;
                             Console.ForegroundColor = ConsoleColor.Green; Console.WriteLine("\nGoodbye!\n"); Console.ResetColor();
                             break;
 
-                        case "H":
+                        case "H": //display help
                             Console.ForegroundColor = ConsoleColor.Green; Console.WriteLine("\nCommands:"); Console.ResetColor();
                             Console.WriteLine("H               Help - displays this message\nA <shape>       Add <shape> to canvas\nS               See list of shapes\nT               Delete Last Shape\nU               Undo last operation\nR               Redo last operation\nV               Change Canvas Size\nD               Display canvas to console\nE               Export canvas\nO               Clear Console\nQ               Quit application\n");
                             break;
 
-                        case "S":
+                        case "S": //display list of shapes you can add
                             Console.ForegroundColor = ConsoleColor.Green; Console.WriteLine("\nList of Shapes:"); Console.ResetColor();
                             Console.WriteLine("A rectangle\nA circle\nA ellipse\nA line\nA path\nA polygon\nA polyline\n");
                             break;
 
-                        case "D":
+                        case "D": //display the svg to console
                             Console.ForegroundColor = ConsoleColor.Green; Console.WriteLine("\nDisplaying SVG To Console:\n"); Console.ResetColor();
                             Console.WriteLine(svgOpen);
                             Console.WriteLine(canvas);
                             Console.WriteLine(svgClose + "\n");
                             break;
 
-                        case "T":
+                        case "T": //delete command
                             try
                             {
                                 user.Action(new DeleteShapeCommand(canvas));
@@ -150,30 +134,30 @@ namespace Assignment3
                             }
                             break;
 
-                        case "U":
+                        case "U": //undo command
                             user.Undo();
                             break;
 
-                        case "R":
+                        case "R": //redo command
                             user.Redo();
                             break;
 
-                        case "O":
+                        case "O": //clear console command
                             Console.Clear();
                             break;
 
-                        case "hello":
+                        case "hello": //hello
                             Console.ForegroundColor = ConsoleColor.DarkMagenta; Console.WriteLine("\nHello!\n"); Console.ResetColor();
                             break;
 
-                        default:
+                        default: //default case if user does not enter any other case
                             Console.ForegroundColor = ConsoleColor.Red; Console.WriteLine("\nInvalid Input! - Type 'H' for commands!\n"); Console.ResetColor();
                             break;
                     }
                 }
                 programRun = false;
             }
-        }
+        } // the rest are methods to handle everything. they are pretty straight forward.
         public static void Export(string? svgOpen, string? svgClose, Canvas canvas)
         {
             Console.ForegroundColor = ConsoleColor.Blue; Console.WriteLine("\nEnter File Name:"); Console.ResetColor();
