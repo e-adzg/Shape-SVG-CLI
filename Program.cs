@@ -3,11 +3,10 @@ Student Name: Erikas Adzgauskas
 Student Number: 20415984
 
 This is my SVG Maker. I am using NET 6.0. 
-Tested on Windows 11 in VSCode 1.72.2
+Tested on Windows 11 Pro in VSCode 1.72.2
 
 HOW TO USE:
 to run programme, type 'dotnet run' in console. 
-a list of instructions are printed to the console.
 for example, if you want to make a rectangle, you would type 'rectangle'
 then, input all of the co-ordinates and CSS styles you wish to add.
 all inputs take in string, so to add colour, you can type 'lime'
@@ -152,25 +151,11 @@ namespace Assignment3
                             break;
 
                         case "U":
-                            try
-                            {
-                                user.Undo();
-                            }
-                            catch
-                            {
-                                Console.ForegroundColor = ConsoleColor.Red; Console.WriteLine("\nERROR: Cannot Undo!\n"); Console.ResetColor();
-                            }
+                            user.Undo();
                             break;
 
                         case "R":
-                            try
-                            {
-                                user.Redo();
-                            }
-                            catch
-                            {
-                                Console.ForegroundColor = ConsoleColor.Red; Console.WriteLine("\nERROR: Cannot Redo!\n"); Console.ResetColor();
-                            }
+                            user.Redo();
                             break;
 
                         case "O":
@@ -182,7 +167,7 @@ namespace Assignment3
                             break;
 
                         default:
-                            Console.ForegroundColor = ConsoleColor.Red; Console.WriteLine("\nInvalid Input! - Type 'Q' for commands!\n"); Console.ResetColor();
+                            Console.ForegroundColor = ConsoleColor.Red; Console.WriteLine("\nInvalid Input! - Type 'H' for commands!\n"); Console.ResetColor();
                             break;
                     }
                 }

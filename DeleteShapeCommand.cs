@@ -1,6 +1,5 @@
 public class DeleteShapeCommand : Command
 {
-
     Shape shape;
     Canvas canvas;
 

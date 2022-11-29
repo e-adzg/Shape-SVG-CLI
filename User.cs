@@ -17,7 +17,6 @@ public class User
 
     public void Action(Command command)
     {
-        // first update the undo - redo stacks
         undo.Push(command);  // save the command to the undo command
         redo.Clear();        // once a new command is issued, the redo stack clears
 
@@ -34,23 +33,33 @@ public class User
         }
     }
 
-    // Undo
     public void Undo()
     {
-        Console.WriteLine("Undoing operation!"); Console.WriteLine();
         if (undo.Count > 0)
         {
-            Command c = undo.Pop(); c.Undo(); redo.Push(c);
+            Console.ForegroundColor = ConsoleColor.Green; Console.WriteLine("\nUndo Complete!"); Console.ResetColor();
+            Command c = undo.Pop();
+            c.Undo();
+            redo.Push(c);
+        }
+        else
+        {
+            Console.ForegroundColor = ConsoleColor.Red; Console.WriteLine("\nERROR: Cannot Undo!\n"); Console.ResetColor();
         }
     }
 
-    // Redo
     public void Redo()
     {
-        Console.WriteLine("Redoing operation!"); Console.WriteLine();
         if (redo.Count > 0)
         {
-            Command c = redo.Pop(); c.Do(); undo.Push(c);
+            Console.ForegroundColor = ConsoleColor.Green; Console.WriteLine("\nRedo Complete!"); Console.ResetColor();
+            Command c = redo.Pop();
+            c.Do();
+            undo.Push(c);
+        }
+        else
+        {
+            Console.ForegroundColor = ConsoleColor.Red; Console.WriteLine("\nERROR: Cannot Redo!\n"); Console.ResetColor();
         }
     }
 

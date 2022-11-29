@@ -2,33 +2,30 @@ public class Canvas
 {
     private Stack<Shape> canvas = new Stack<Shape>();
 
-    public void Add(Shape s)
+    public void Add(Shape shape)
     {
-        canvas.Push(s);
-        Console.WriteLine("\nAdded Shape: " + s + "\n");
+        canvas.Push(shape);
+        Console.ForegroundColor = ConsoleColor.Green; Console.WriteLine("\nAdded Shape:\n" + shape + "\n"); Console.ResetColor();
     }
     public Shape Remove()
     {
-        Shape s = canvas.Pop();
-        Console.WriteLine("Removed Shape from canvas: {0}" + Environment.NewLine, s);
-        return s;
+        Shape shape = canvas.Pop();
+        Console.ForegroundColor = ConsoleColor.Green; Console.WriteLine("\nRemoved Shape:\n" + shape + "\n"); Console.ResetColor();
+        return shape;
     }
 
     public Canvas()
     {
-        Console.ForegroundColor = ConsoleColor.Green;
-        Console.WriteLine("\nCanvas Created - use commands to add shapes to the canvas!\n");
-        Console.ResetColor();
+        Console.ForegroundColor = ConsoleColor.Green; Console.WriteLine("\nCanvas Created - use commands to add shapes to the canvas!\n"); Console.ResetColor();
     }
 
     public override string ToString()
     {
-        String str = "";
-        foreach (Shape s in canvas)
+        String allShapes = "";
+        foreach (Shape shape in canvas)
         {
-            // str += " " + s + Environment.NewLine;
-            str += s + Environment.NewLine;
+            allShapes += shape + Environment.NewLine;
         }
-        return str;
+        return allShapes;
     }
 }
