@@ -173,7 +173,6 @@ namespace Assignment4
         }
         public static string? ChangeCanvasWidth(string? svgWidth)
         {
-
             Console.ForegroundColor = ConsoleColor.Blue; Console.WriteLine("Enter Canvas Width:"); Console.ResetColor();
             string? userSvgWidth = Console.ReadLine();
             return userSvgWidth;
