@@ -2,7 +2,12 @@
 
 
 MEMENTO STUFF:
-- only circle works, add rest of shapes
 - clean
+- nullable stuff
 
 remove the old addshape in methods
+
+move classes to their own folders if possible?
+
+when delete and then undo, it has blank
+

@@ -5,7 +5,7 @@ public class Canvas
     public void Add(Shape s)
     {
         canvas.Push(s);
-        Console.WriteLine("Added Shape to canvas: {0}" + Environment.NewLine, s);
+        Console.WriteLine("\nAdded Shape: " + s + "\n");
     }
     public Shape Remove()
     {

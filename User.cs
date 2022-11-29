@@ -26,12 +26,10 @@ public class User
         Type t = command.GetType();
         if (t.Equals(typeof(AddShapeCommand)))
         {
-            Console.WriteLine("Command Received: Add new Shape!" + Environment.NewLine);
             command.Do();
         }
         if (t.Equals(typeof(DeleteShapeCommand)))
         {
-            Console.WriteLine("Command Received: Delete last Shape!" + Environment.NewLine);
             command.Do();
         }
     }
