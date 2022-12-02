@@ -1,5 +1,7 @@
 # Shape SVG CLI
 
+Use this CLI App to create shapes in SVG format!
+
 [![Alt text](readMePicturepng.png)](https://www.youtube.com/watch?v=1qEBJnzuLiA&ab_channel=BingeSociety)
 
 ## PlantUML
