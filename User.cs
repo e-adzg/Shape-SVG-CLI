@@ -1,3 +1,4 @@
+using static System.Console;
 public class User //user class
 {
     private Stack<Command> undo; //creates undo stack
@@ -33,14 +34,14 @@ public class User //user class
     {
         if (undo.Count > 0) //if there is more than 0
         {
-            Console.ForegroundColor = ConsoleColor.Green; Console.WriteLine("\nUndo Complete!"); Console.ResetColor();
+            ForegroundColor = ConsoleColor.Green; WriteLine("\nUndo Complete!"); ResetColor();
             Command c = undo.Pop(); //get latest command and pop it
             c.Undo(); //undo the command
             redo.Push(c); //push the command to redo stack
         }
         else //or else it is empty and error
         {
-            Console.ForegroundColor = ConsoleColor.Red; Console.WriteLine("\nERROR: Cannot Undo!\n"); Console.ResetColor();
+            ForegroundColor = ConsoleColor.Red; WriteLine("\nERROR: Cannot Undo!\n"); ResetColor();
         }
     }
 
@@ -48,14 +49,14 @@ public class User //user class
     {
         if (redo.Count > 0) //if there is more than 0
         {
-            Console.ForegroundColor = ConsoleColor.Green; Console.WriteLine("\nRedo Complete!"); Console.ResetColor();
+            ForegroundColor = ConsoleColor.Green; WriteLine("\nRedo Complete!"); ResetColor();
             Command c = redo.Pop(); //get latest command and pop it
             c.Do(); //do the command from redo stack
             undo.Push(c); //push the command to undo stack
         }
         else //or else the redo stack is empty and error
         {
-            Console.ForegroundColor = ConsoleColor.Red; Console.WriteLine("\nERROR: Cannot Redo!\n"); Console.ResetColor();
+            ForegroundColor = ConsoleColor.Red; WriteLine("\nERROR: Cannot Redo!\n"); ResetColor();
         }
     }
 
