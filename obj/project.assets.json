@@ -13,11 +13,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Erik\\Documents\\VScode\\C#\\CS264_Assignment4\\Assignment3.csproj",
+      "projectUniqueName": "C:\\Users\\Erik\\Documents\\VScode\\C#\\Shape-SVG-CLI\\Assignment3.csproj",
       "projectName": "Assignment3",
-      "projectPath": "C:\\Users\\Erik\\Documents\\VScode\\C#\\CS264_Assignment4\\Assignment3.csproj",
+      "projectPath": "C:\\Users\\Erik\\Documents\\VScode\\C#\\Shape-SVG-CLI\\Assignment3.csproj",
       "packagesPath": "C:\\Users\\Erik\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Erik\\Documents\\VScode\\C#\\CS264_Assignment4\\obj\\",
+      "outputPath": "C:\\Users\\Erik\\Documents\\VScode\\C#\\Shape-SVG-CLI\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\Erik\\AppData\\Roaming\\NuGet\\NuGet.Config"

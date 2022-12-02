@@ -1,6 +1,5 @@
 ﻿/*
-Student Name: Erikas Adzgauskas
-Student Number: 20415984
+https://github.com/e-adzg/Shape-SVG-CLI
 
 This is my SVG Maker. I am using NET 6.0. 
 Tested on Windows 11 Pro in VSCode 1.73.0
@@ -43,7 +42,7 @@ namespace Assignment4
 
             while (programRun == true) //keeps program on
             {
-                Console.ForegroundColor = ConsoleColor.Red; Console.WriteLine("Assignment 4"); Console.WriteLine("By Erikas Adzgauskas 20415984"); Console.ResetColor();
+                Console.ForegroundColor = ConsoleColor.Red; Console.WriteLine("Shape SVG CLI"); Console.WriteLine("By e-adzg"); Console.ResetColor();
                 Console.ForegroundColor = ConsoleColor.Blue; Console.WriteLine("===================================="); Console.ResetColor();
 
                 Canvas canvas = new Canvas(); //creates canvas
